@@ -66,6 +66,16 @@ public class Cuisine {
   //   }
   // }
 
+  public static Cuisine find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM cuisine WHERE id=:id";
+      Cuisine cuisine = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Cuisine.class);
+        return cuisine;
+    }
+  }
+  
   /******************************************************
     Students:
     TODO: Create find method
