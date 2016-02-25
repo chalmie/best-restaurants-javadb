@@ -63,11 +63,38 @@ public class Restaurant {
   }
 
   //UPDATE
-  // public void update(String name) {
-  //   try(Connection con = DB.sql2o.open()) {
-  //
-  //     }
-  // }
+  public void updateName(String name) {
+    this.name = name;
+    String sql = "UPDATE restaurants SET name = :name WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("name", name)
+        .addParameter("id", id)
+        .executeUpdate();
+      }
+  }
+
+  public void updateDescription(String description) {
+    this.description = description;
+    String sql = "UPDATE restaurants SET description = :description WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("description", description)
+        .addParameter("id", id)
+        .executeUpdate();
+      }
+  }
+
+  public void updateCuisine(int cuisine_id) {
+    this.cuisine_id = cuisine_id;
+    String sql = "UPDATE restaurants SET cuisine_id = :cuisine_id WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("cuisine_id", cuisine_id)
+        .addParameter("id", id)
+        .executeUpdate();
+      }
+  }
 
   //DELETE
   public void delete() {
@@ -88,10 +115,4 @@ public class Restaurant {
       return restaurant;
     }
   }
-  /******************************************************
-    Students:
-    TODO: Create find method
-    TODO: Create method to get cuisine type
-  *******************************************************/
-
 }

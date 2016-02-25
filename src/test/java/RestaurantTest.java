@@ -50,4 +50,27 @@ public class RestaurantTest {
     assertEquals(Restaurant.all().size(), 0);
   }
 
+  @Test
+  public void updateName_updatesRestaurantName_true() {
+    Restaurant newRestaurant = new Restaurant("Screen Door", 1, "A little stuffy");
+    newRestaurant.save();
+    newRestaurant.updateName("Porch Door");
+    assertEquals("Porch Door", newRestaurant.getName());
+  }
+
+  @Test
+  public void updateDescription_updatesRestaurantDescription_true() {
+    Restaurant newRestaurant = new Restaurant("Screen Door", 1, "A little stuffy");
+    newRestaurant.save();
+    newRestaurant.updateDescription("Drafty");
+    assertEquals("Drafty", newRestaurant.getDescription());
+  }
+
+  @Test
+  public void updateCuisine_updatesCuisineId_true() {
+    Restaurant newRestaurant = new Restaurant("Screen Door", 1, "A little stuffy");
+    newRestaurant.save();
+    newRestaurant.updateCuisine(3);
+    assertEquals(newRestaurant.getCuisineId(), 3);
+  }
 }

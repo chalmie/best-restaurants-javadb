@@ -1,20 +1,35 @@
+
 <h1>$restaurant.getName()</h1>
-<p>$restaurant.getDescription()</p>
+<h3>$restaurant.getDescription()</h3>
 
-<form action='/restaurant/$restaurant.getId()' method='post'>
-  <div class="form-group">
-    <label for="name">Update Name:</label>
-    <input id="name" name="name" class="form-control" type="text">
-    <label for="description">Update Description:</label>
-    <input id="description" name="description" class="form-control" type="text">
-    <label for="cuisine_id">Update type of cuisine</label>
-    <select id='cuisine_id' name='cuisine_id' type='text'>
-      #foreach($cuisine in $cuisines)
-        <option value="$cuisine.getId()">$cuisine.getType()</option>
-      #end
-    </select>
-  </div>
-</form>
-
-
+<div class="container">
+  <form action='/restaurant/$restaurant.getId()/updateName' method='post' class="form-inline">
+    <div class="form-group">
+      <label for="name">Update Name:</label>
+      <input id="name" name="name" class="form-control" type="text">
+    </div>
+    <button type="submit" class="btn">Update!</button>
+  </form>
+  <br>
+  <form action='/restaurant/$restaurant.getId()/updateDescription' method='post' class="form-inline">
+    <div class="form-group">
+      <label for="description">Update Description:</label>
+      <input id="description" name="description" class="form-control" type="text">
+    </div>
+    <button type="submit" class="btn">Update!</button>
+  </form>
+  <br>
+  <form action='/restaurant/$restaurant.getId()/updateCuisine' method='post' class="form-inline">
+    <div class="form-group">
+      <label for="cuisine_id">Update type of cuisine</label>
+      <select id='cuisine_id' name='cuisine_id' type='text'>
+        #foreach($cuisine in $cuisines)
+          <option value="$cuisine.getId()">$cuisine.getType()</option>
+        #end
+      </select>
+    </div>
+    <button type="submit" class="btn">Update!</button>
+  </form>
+</div>
+<br>
 <a href="/">Return to Main Page</a>

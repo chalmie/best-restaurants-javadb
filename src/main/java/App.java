@@ -59,9 +59,35 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/restaurant/:id", (request, response) -> {
+    post("/restaurant/:id/updateName", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       Restaurant restaurant = Restaurant.find(Integer.parseInt(request.params(":id")));
+      String inputtedName = request.queryParams("name");
+      restaurant.updateName(inputtedName);
+
+      model.put("restaurant", restaurant);
+      model.put("cuisines", Cuisine.all());
+      model.put("template", "templates/restaurant.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/restaurant/:id/updateDescription", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Restaurant restaurant = Restaurant.find(Integer.parseInt(request.params(":id")));
+      String inputtedDescription = request.queryParams("description");
+      restaurant.updateDescription(inputtedDescription);
+
+      model.put("restaurant", restaurant);
+      model.put("cuisines", Cuisine.all());
+      model.put("template", "templates/restaurant.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/restaurant/:id/updateCuisine", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Restaurant restaurant = Restaurant.find(Integer.parseInt(request.params(":id")));
+      int inputtedCuisineId = Integer.parseInt(request.queryParams("cuisine_id"));
+      restaurant.updateCuisine(inputtedCuisineId);
 
       model.put("restaurant", restaurant);
       model.put("cuisines", Cuisine.all());
