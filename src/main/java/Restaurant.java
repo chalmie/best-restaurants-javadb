@@ -9,7 +9,7 @@ public class Restaurant {
 
   public Restaurant (String name, int cuisine_id, String description) {
     this.name = name;
-    this.id = cuisine_id;
+    this.cuisine_id = cuisine_id;
     this.description = description;
   }
 

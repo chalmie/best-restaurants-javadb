@@ -15,7 +15,7 @@
     <input id="name" name="name" class="form-control" type="text">
     <label for="description">Description:</label>
     <input id="description" name="description" class="form-control" type="text">
-    <label for="cuisine_id">Select a List</label>
+    <label for="cuisine_id">Type of cuisine</label>
     <select id='cuisine_id' name='cuisine_id' type='text'>
       #foreach($cuisine in $cuisines)
         <option value="$cuisine.getId()">$cuisine.getType()</option>
@@ -28,8 +28,8 @@
 
 
 #foreach($cuisine in $cuisines)
- <h3><a href="cuisine/$cuisine.getId()">$cuisine.getType()</a></h3>
- #foreach($restaurant in $cuisine.getRestaurants())
-  <p>$restaurant.getName()</p>
- #end
+  <h3>$cuisine.getType()</h3>
+  #foreach($restaurant in $cuisine.getRestaurants())
+    <p><a href="restaurant/$restaurant.getId()">$restaurant.getName()</a></p>
+  #end
 #end

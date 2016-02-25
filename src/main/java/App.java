@@ -1,4 +1,5 @@
 import java.util.Map;
+import java.util.List;
 import java.util.HashMap;
 import java.util.ArrayList;
 import static spark.Spark.*;
@@ -32,7 +33,7 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/restaurant", (request, response) -> {
+    post("/restaurants", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       String inputtedName = request.queryParams("name");
       String inputtedDescription = request.queryParams("description");
@@ -41,22 +42,33 @@ public class App {
       Restaurant newRestaurant = new Restaurant(inputtedName, inputtedCuisineId, inputtedDescription);
       newRestaurant.save();
 
+      model.put("inputtedCuisineId", inputtedCuisineId);
       model.put("restaurants", Restaurant.all());
       model.put("cuisines", Cuisine.all());
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    // get("/cuisine/:id", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //   Word word = Word.find(Integer.parseInt(request.params(":id")));
-    //
-    //
-    //   model.put("word", word);
-    //   model.put("definitions", word.getDefinitions());
-    //   model.put("template", "templates/word.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
+    get("/restaurant/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Restaurant restaurant = Restaurant.find(Integer.parseInt(request.params(":id")));
+
+      model.put("restaurant", restaurant);
+      model.put("cuisines", Cuisine.all());
+      model.put("template", "templates/restaurant.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/restaurant/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Restaurant restaurant = Restaurant.find(Integer.parseInt(request.params(":id")));
+
+      model.put("restaurant", restaurant);
+      model.put("cuisines", Cuisine.all());
+      model.put("template", "templates/restaurant.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     /******************************************************
     STUDENTS:
     TODO: Create page to display information about the selected restaurant
