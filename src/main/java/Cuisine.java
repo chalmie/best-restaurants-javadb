@@ -58,13 +58,14 @@ public class Cuisine {
   //   }
   // }
 
-  // public void delete() {
-  //   try(Connection con = DB.sql2o.open()) {
-      /******************************************************
-        Students: TODO: Create sql query and execute update
-      *******************************************************/
-  //   }
-  // }
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM cuisine WHERE id=:id";
+        con.createQuery(sql)
+          .addParameter("id", id)
+          .executeUpdate();
+    }
+  }
 
   public static Cuisine find(int id) {
     try(Connection con = DB.sql2o.open()) {
@@ -75,11 +76,16 @@ public class Cuisine {
         return cuisine;
     }
   }
-  
-  /******************************************************
-    Students:
-    TODO: Create find method
-    TODO: Create method to get restaurants
-  *******************************************************/
+
+  public List<Restaurant> getRestaurants() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM restaurants WHERE cuisine_id=:id";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetch(Restaurant.class);
+    }
+  }
+
+
 
 }

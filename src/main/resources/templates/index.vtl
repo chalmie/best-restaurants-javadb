@@ -1,1 +1,35 @@
+<h1>The Best Restaurants!</h1>
 
+<form action='/' method='post'>
+  <div class="form-group">
+    <label for="cuisine">Add a new type of cuisine:</label>
+    <input id="cuisine" name="cuisine" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn">Submit</button>
+</form>
+
+<form action='/restaurants' method='post'>
+  <p>Or, add a restaurant to an existing type of cuisine:</p>
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input id="name" name="name" class="form-control" type="text">
+    <label for="description">Description:</label>
+    <input id="description" name="description" class="form-control" type="text">
+    <label for="cuisine_id">Select a List</label>
+    <select id='cuisine_id' name='cuisine_id' type='text'>
+      #foreach($cuisine in $cuisines)
+        <option value="$cuisine.getId()">$cuisine.getType()</option>
+      #end
+    </select>
+  </div>
+  <button type="submit" class="btn">Add it!</button>
+</form>
+
+
+
+#foreach($cuisine in $cuisines)
+ <h3><a href="cuisine/$cuisine.getId()">$cuisine.getType()</a></h3>
+ #foreach($restaurant in $restaurants)
+ <p><a href="restaurant/$restaurant.getId()">$restaurant.getName()</a></p>
+ #end
+#end

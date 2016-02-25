@@ -7,8 +7,47 @@ public class RestaurantTest {
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
-  // @Test
-  // public void all_emptyAtFirst() {
-  //     assertEquals(Restaurant.all().size(), 0);
-  // }
+  @Test
+  public void all_emptyAtFirst() {
+      assertEquals(Restaurant.all().size(), 0);
+  }
+
+  @Test
+  public void equals_returnsTrueIfSame(){
+    Restaurant firstRestaurant = new Restaurant("Screen Door", 1, "A little stuffy");
+    Restaurant secondRestaurant = new Restaurant("Screen Door", 1, "A little stuffy");
+    assertTrue(firstRestaurant.equals(secondRestaurant));
+  }
+
+  @Test
+  public void save_returnsListOfRestaurants() {
+    Restaurant newRestaurant = new Restaurant("Screen Door", 1, "A little stuffy");
+    newRestaurant.save();
+    assertTrue(Restaurant.all().get(0).equals(newRestaurant));
+  }
+
+  @Test
+  public void save_assignsIdToObject() {
+    Restaurant newRestaurant = new Restaurant("Screen Door", 1, "A little stuffy");
+    newRestaurant.save();
+    Restaurant savedRestaurant = Restaurant.all().get(0);
+    assertEquals(newRestaurant.getId(), savedRestaurant.getId());
+  }
+
+  @Test
+  public void find_findsRestaurantinDatabase_true() {
+    Restaurant newRestaurant = new Restaurant("Screen Door", 1, "A little stuffy");
+    newRestaurant.save();
+    Restaurant savedRestaurant = Restaurant.find(newRestaurant.getId());
+    assertTrue(newRestaurant.equals(savedRestaurant));
+  }
+
+  @Test
+  public void delete_deletesRestaurantFromDatabase_true() {
+    Restaurant newRestaurant = new Restaurant("Screen Door", 1, "A little stuffy");
+    newRestaurant.save();
+    newRestaurant.delete();
+    assertEquals(Restaurant.all().size(), 0);
+  }
+
 }

@@ -41,5 +41,36 @@ public class CuisineTest {
     assertTrue(newCuisine.equals(savedCuisine));
   }
 
+  @Test
+  public void delete_deletesCuisineFromDatabase_true() {
+    Cuisine newCuisine = new Cuisine("Lean");
+    newCuisine.save();
+    newCuisine.delete();
+    assertEquals(Cuisine.all().size(), 0);
+  }
+
+  // @Test
+  // public void getRestaurants_retrievesAllRestaurantsFromDatabase_RestaurantList() {
+  //   Cuisine newCuisine = new Cuisine("Lean");
+  //   newCuisine.save();
+  //   Restaurant firstRestaurant = newRestaurant("Screen Door", newCuisine.getId(), "A little stuffy");
+  //   firstRestaurant.save();
+  //   Restaurant secondRestaurant = newRestaurant("Lardo", newCuisine.getId(), "Super classy");
+  //   firstRestaurant.save();
+  // }
+
 
 }
+
+
+// @Test
+//   public void getTasks_retrievesALlTasksFromDatabase_tasksList() {
+//     Category myCategory = new Category("Household chores");
+//     myCategory.save();
+//     Task firstTask = new Task("Mow the lawn", myCategory.getId(), "2016-02-25");
+//     firstTask.save();
+//     Task secondTask = new Task("Do the dishes", myCategory.getId(), "2016-02-25");
+//     secondTask.save();
+//     Task[] tasks = new Task[] { firstTask, secondTask };
+//     assertTrue(myCategory.getTasks().containsAll(Arrays.asList(tasks)));
+//   }
