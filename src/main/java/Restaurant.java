@@ -25,6 +25,10 @@ public class Restaurant {
     return description;
   }
 
+  public int getCuisineId() {
+    return cuisine_id;
+  }
+
   @Override
   public boolean equals(Object otherRestaurant){
     if (!(otherRestaurant instanceof Restaurant)) {

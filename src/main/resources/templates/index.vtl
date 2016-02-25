@@ -29,7 +29,7 @@
 
 #foreach($cuisine in $cuisines)
  <h3><a href="cuisine/$cuisine.getId()">$cuisine.getType()</a></h3>
- #foreach($restaurant in $restaurants)
- <p><a href="restaurant/$restaurant.getId()">$restaurant.getName()</a></p>
+ #foreach($restaurant in $cuisine.getRestaurants())
+  <p>$restaurant.getName()</p>
  #end
 #end

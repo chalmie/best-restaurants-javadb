@@ -32,7 +32,7 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/restaurants", (request, response) -> {
+    post("/restaurant", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       String inputtedName = request.queryParams("name");
       String inputtedDescription = request.queryParams("description");
