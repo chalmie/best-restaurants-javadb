@@ -18,6 +18,7 @@ public class App {
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");
+      model.put("restaurants", Restaurant.all());
       model.put("cuisines", Cuisine.all());
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -92,6 +93,18 @@ public class App {
       model.put("restaurant", restaurant);
       model.put("cuisines", Cuisine.all());
       model.put("template", "templates/restaurant.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/restaurant/:id/delete", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Restaurant restaurant = Restaurant.find(Integer.parseInt(request.params(":id")));
+      restaurant.delete();
+
+      response.redirect("/");
+      // model.put("restaurants", Restaurant.all());
+      // model.put("cuisines", Cuisine.all());
+      // model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
