@@ -26,10 +26,18 @@
 </form>
 
 
-
 #foreach($cuisine in $cuisines)
-  <h3>$cuisine.getType()</h3>
-  #foreach($restaurant in $cuisine.getRestaurants())
-    <p><a href="restaurant/$restaurant.getId()">$restaurant.getName()</a></p>
-  #end
+        <h3><button class="btn btn-success" type="button" data-toggle="collapse" data-target="#$cuisine.getId()" aria-expanded="false" aria-controls="collapseExample">$cuisine.getType()</h3>
+          #foreach($restaurant in $cuisine.getRestaurants())
+              <div class="collapse restaurant-under-btn" id="$restaurant.getCuisineId()">
+                <div class="card card-block">
+                  <div class="row">
+                    <div class="col-sm-12">
+                  <a href="restaurant/$restaurant.getId()">$restaurant.getName()</a>
+                </div>
+              </div>
+        </div>
+      </div>
+
+    #end
 #end
